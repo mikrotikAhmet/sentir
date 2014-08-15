@@ -27,4 +27,22 @@
  *
  * @author ahmet
  */
+// Version
+define('VERSION', '1.5.6.3');
 
+// Basic setup
+
+defined('DS') || define('DS', DIRECTORY_SEPARATOR);
+defined('PS') || define('PS', PATH_SEPARATOR);
+defined('_ENGINE') || define('_ENGINE', true);
+defined('_ENGINE_REQUEST_START') ||
+        define('_ENGINE_REQUEST_START', microtime(true));
+defined('APPLICATION_PATH_COR') ||
+        define('APPLICATION_PATH_COR', realpath(dirname(__DIR__)) . '/');
+
+// Configuration
+if (file_exists(APPLICATION_PATH_COR . 'system/config/public.php')) {
+    require_once(APPLICATION_PATH_COR . 'system/config/public.php');
+} else {
+    trigger_error('Configuration file con not be located!');
+}
