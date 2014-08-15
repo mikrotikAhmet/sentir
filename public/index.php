@@ -13,6 +13,7 @@
  * @since		Version 1.0
  * @filesource
  */
+
 // ------------------------------------------------------------------------
 
 /**
@@ -70,35 +71,36 @@ $registry->set('db', $db);
 
 // Application
 if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) {
-    $store_query = $db->query("SELECT * FROM " . DB_PREFIX . "application WHERE REPLACE(`ssl`, 'www.', '') = '" . $db->escape('https://' . str_replace('www.', '', $_SERVER['HTTP_HOST']) . rtrim(dirname($_SERVER['PHP_SELF']), '/.\\') . '/') . "'");
+	$app_query = $db->query("SELECT * FROM " . DB_PREFIX . "application WHERE REPLACE(`ssl`, 'www.', '') = '" . $db->escape('https://' . str_replace('www.', '', $_SERVER['HTTP_HOST']) . rtrim(dirname($_SERVER['PHP_SELF']), '/.\\') . '/') . "'");
 } else {
-    $store_query = $db->query("SELECT * FROM " . DB_PREFIX . "application WHERE REPLACE(`url`, 'www.', '') = '" . $db->escape('http://' . str_replace('www.', '', $_SERVER['HTTP_HOST']) . rtrim(dirname($_SERVER['PHP_SELF']), '/.\\') . '/') . "'");
+	$app_query = $db->query("SELECT * FROM " . DB_PREFIX . "application WHERE REPLACE(`url`, 'www.', '') = '" . $db->escape('http://' . str_replace('www.', '', $_SERVER['HTTP_HOST']) . rtrim(dirname($_SERVER['PHP_SELF']), '/.\\') . '/') . "'");
 }
 
-if ($store_query->num_rows) {
-    $config->set('config_application_id', $store_query->row['application_id']);
+if ($app_query->num_rows) {
+	$config->set('config_application_id', $app_query->row['application_id']);
 } else {
-    $config->set('config_application_id', 0);
+	$config->set('config_application_id', 0);
 }
 
 // Settings
-$query = $db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE application_id = '0' OR application_id = '" . (int) $config->get('config_application_id') . "' ORDER BY application_id ASC");
+$settings = $db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE application_id = '0' OR application_id = '" . (int)$config->get('config_application_id') . "' ORDER BY application_id ASC");
 
-if ($query->rows) { // Create an array to check if they are setted or not. then give an error if one of you checks fails.
-    foreach ($query->rows as $setting) {
-        if (!$setting['serialized']) {
-            $config->set($setting['key'], $setting['value']);
-        } else {
-            $config->set($setting['key'], unserialize($setting['value']));
-        }
-    }
+foreach ($settings->rows as $setting) {
+	if (!$setting['serialized']) {
+		$config->set($setting['key'], $setting['value']);
+	} else {
+		$config->set($setting['key'], unserialize($setting['value']));
+	}
+}
 
-    if (!$store_query->num_rows) {
-        $config->set('config_url', HTTP_SERVER);
-        $config->set('config_ssl', HTTPS_SERVER);
-    }
-} else {
-    trigger_error('Application seems not setted properly!');
+if (!$app_query->num_rows) {
+	$config->set('config_url', HTTP_SERVER);
+	$config->set('config_ssl', HTTPS_SERVER);	
+}
+
+if (!$settings->rows){
+    
+    trigger_error('Application is not setted properly!');
 }
 
 // Url
@@ -166,9 +168,9 @@ $registry->set('session', $session);
 // Language Detection
 $languages = array();
 
-$query = $db->query("SELECT * FROM `" . DB_PREFIX . "language` WHERE status = '1'");
+$lang_query = $db->query("SELECT * FROM `" . DB_PREFIX . "language` WHERE status = '1'");
 
-foreach ($query->rows as $result) {
+foreach ($lang_query->rows as $result) {
     $languages[$result['code']] = $result;
 }
 
@@ -241,7 +243,6 @@ $registry->set('encryption', new Encryption($config->get('config_encryption')));
 
 // Front Controller 
 $controller = new Front($registry);
-
 
 
 // Page Data
