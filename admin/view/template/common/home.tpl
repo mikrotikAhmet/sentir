@@ -1,3 +1,3 @@
 <?php echo $header?>
-Main Page
+Home
 <?php echo $footer?>

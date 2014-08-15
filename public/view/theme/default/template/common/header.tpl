@@ -34,57 +34,5 @@
         <?php echo $google_analytics; ?>
     </head>
     <body>
-        <div class="dark">
-            <div class="navbar" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <?php if (!$logo) { ?>
-                            <a class="navbar-brand" href="<?php echo $home?>" title="<?php echo $name?>"><?php echo $name?></a>
-                            <?php } else { ?>
-                            <a href="<?php echo $home?>" title="<?php echo $name?>"><img style="padding: 0px 0px;" src="<?php echo $logo?>"/></a>
-                        <?php } ?>
-                    </div>
-                    <?php if ($this->page->getPageHeader()) { ?>
-                    <div class="navbar-collapse collapse">
-                        <?php if ($leftmenus) { ?>
-                        <ul class="nav navbar-nav">
-                            <?php foreach ($leftmenus as $leftmenu) { ?>
-                            <li class=""><a href="<?php echo $leftmenu['href']?>"><?php echo $leftmenu['title']?></a></li>
-                            <?php } ?>
-                        </ul>
-                        <?php } ?>
-                        <?php if ($rightmenus) { ?>
-                        <ul class="nav navbar-nav navbar-right">
-                            <?php foreach ($rightmenus as $rightmenu) { ?>
-                            <li class=""><a href="<?php echo $rightmenu['href']?>"><?php echo $rightmenu['title']?></a></li>
-                            <?php } ?>
-                        </ul>
-                        <?php } ?>
-                    </div>
-                    <?php } ?>
-                </div>
-            </div>
-        </div>
-        <?php if(!$_GET && !$this->config->get('config_maintenance')) { ?>
-<div class="dark">
-    <div class="jumbotron">
-        <div class="container">
-            <img class="jumbotron-bitcoin" id="btc" src="public/view/theme/semitepayment/img/examples/semite-ccard.png" onerror="this.onerror=null; this.src='public/view/theme/semitepayment/img/examples/semite-ccard.png'">
-            <div class="row">
-                <div class="col-md-6">
-                    <h1 class="primary-text" id="title">Pay online, safely and easily.</h1>
-                    <p class="secondary-text" id="sub">With SemitePay your financial details are always safe when you shop and pay online..</p>
-                    <p><a href="/register" class="btn btn-primary btn-lg" id="btn" role="button">Sign up for free »</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-        <?php }?>
+        
         
