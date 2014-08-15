@@ -46,3 +46,10 @@ if (file_exists(APPLICATION_PATH_COR . 'system/config/public.php')) {
 } else {
     trigger_error('Configuration file con not be located!');
 }
+
+// Configuration
+if (file_exists(DIR_SYSTEM . 'startup.php')) {
+    require_once(DIR_SYSTEM . 'startup.php');
+} else {
+    trigger_error('Startup file con not be located!');
+}
