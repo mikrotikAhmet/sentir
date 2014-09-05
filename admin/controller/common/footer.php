@@ -26,12 +26,10 @@ if (!defined('DIR_APPLICATION'))
 class ControllerCommonFooter extends Controller {
 
     protected function index() {
-        $this->language->load('common/footer');
-        
-        $this->document->addScript('view/assets/js/apps.js');
-        
+
         $this->data['scripts'] = $this->document->getScripts();
-        
+
+        $this->language->load('common/footer');
 
         $this->data['text_confirm'] = $this->language->get('text_confirm');
         $this->data['text_footer'] = sprintf($this->language->get('text_footer'), VERSION);

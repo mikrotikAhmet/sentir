@@ -26,7 +26,7 @@ if (!defined('DIR_APPLICATION'))
 class ControllerCommonHome extends Controller {
 
     public function index() {
-
+        
         $this->language->load('common/home');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -130,18 +130,18 @@ class ControllerCommonHome extends Controller {
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
             'href' => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+            'home'=> true,
             'separator' => false
         );
 
         $this->data['token'] = $this->session->data['token'];
-        
-        
+
         if ($this->config->get('config_currency_auto')) {
             $this->load->model('localisation/currency');
 
             $this->model_localisation_currency->updateCurrencies();
         }
-        
+
         $this->template = 'common/home.tpl';
         $this->children = array(
             'common/header',
@@ -225,11 +225,16 @@ class ControllerCommonHome extends Controller {
                 'common/forgotten',
                 'common/reset',
                 'error/not_found',
-                'error/permission'
+                'error/permission',
             );
 
             if (!in_array($route, $ignore) && !$this->user->hasPermission('access', $route)) {
+                
+                $this->user->setPermission(false);
+                
                 return $this->forward('error/permission');
+            } else {
+                $this->user->setPermission(true);
             }
         }
     }

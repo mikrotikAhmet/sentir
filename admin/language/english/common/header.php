@@ -18,7 +18,7 @@
 
 /**
  * @package     EGC Services Ltd
- * @version     $Id: header.php Aug 15, 2014 ahmet
+ * @version     $Id: header.php Sep 3, 2014 ahmet
  * @copyright   Copyright (c) 2014 EGC Services Ltd .
  * @license     http://www.semiteproject.com/license/
  */
@@ -28,10 +28,21 @@
  * @author ahmet
  */
 // Heading
-$_['heading_title']                    = 'Dashboard';
+$_['heading_title']                    = 'Administration';
 
 // Text
-$_['text_dashboard']                   = 'Dashboard';
-$_['text_logged']                      = 'You are logged in as <span>%s</span>';
-$_['text_logout']                      = 'Logout';
-$_['text_front'] = 'View %s';
+$_['text_notification'] = 'Notifications';
+$_['text_see_all_notification'] = 'See all notifications';
+$_['text_task'] = 'Tasks';
+$_['text_see_all_task'] = 'See all tasks';
+$_['text_message'] = 'Messages';
+$_['text_see_all_message'] = 'See all messages';
+$_['text_account_setting'] = 'Account setting';
+$_['text_payment_setting'] = 'Payment setting';
+$_['text_lock_screen'] = 'Lock screen';
+$_['text_logout'] = 'Log out';
+$_['text_dashboard'] = 'Dashboard';
+$_['text_player'] = 'Players';
+$_['text_user'] = 'Users';
+$_['text_users'] = 'User List';
+$_['text_user_group'] = 'User Groups';

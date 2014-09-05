@@ -29,16 +29,19 @@ class User {
     private $username;
     private $fullname;
     private $avatar;
+    private $twofactor;
     private $permission = array();
+    private $_permission;
 
     public function __construct($registry) {
-        
-        require_once DIR_APPLICATION.'model/tool/image.php';
-        
+
+        require_once DIR_APPLICATION . 'model/tool/image.php';
+
         $this->db = $registry->get('db');
         $this->imager = new ModelToolImage($registry);
         $this->request = $registry->get('request');
         $this->session = $registry->get('session');
+        $this->encryption = $registry->get('encryption');
 
         if (isset($this->session->data['user_id'])) {
             $user_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "user WHERE user_id = '" . (int) $this->session->data['user_id'] . "' AND status = '1'");
@@ -46,7 +49,8 @@ class User {
             if ($user_query->num_rows) {
                 $this->user_id = $user_query->row['user_id'];
                 $this->username = $user_query->row['username'];
-                $this->fullname = ucfirst($user_query->row['firstname']). ' ' . strtoupper($user_query->row['lastname']);
+                $this->twofactor = $user_query->row['two_factor_enabled'];
+                $this->fullname = ucfirst($user_query->row['firstname']) . ' ' . strtoupper($user_query->row['lastname']);
                 $this->avatar = $user_query->row['image'];
 
                 $this->db->query("UPDATE " . DB_PREFIX . "user SET ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE user_id = '" . (int) $this->session->data['user_id'] . "'");
@@ -66,14 +70,25 @@ class User {
         }
     }
 
-    public function login($username, $password) {
-        $user_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "user WHERE username = '" . $this->db->escape($username) . "' AND (password = SHA1(CONCAT(salt, SHA1(CONCAT(salt, SHA1('" . $this->db->escape($password) . "'))))) OR password = '" . $this->db->escape(md5($password)) . "') AND status = '1'");
+    public function login($username, $password, $auth_token = '') {
+
+        $user_info = $this->getUserInfo($username);
+
+        $sql = "SELECT * FROM " . DB_PREFIX . "user WHERE username = '" . $this->db->escape($username) . "' AND (password = SHA1(CONCAT(salt, SHA1(CONCAT(salt, SHA1('" . $this->db->escape($password) . "'))))) OR password = '" . $this->db->escape(md5($password)) . "') AND status = '1'";
+
+
+        if ($user_info && $user_info['two_factor_enabled']) {
+            $sql .= " AND two_factor = '" . $this->db->escape($this->encryption->encrypt($auth_token)) . "'";
+        }
+
+        $user_query = $this->db->query($sql);
 
         if ($user_query->num_rows) {
             $this->session->data['user_id'] = $user_query->row['user_id'];
 
             $this->user_id = $user_query->row['user_id'];
             $this->username = $user_query->row['username'];
+            $this->twofactor = $user_query->row['two_factor_enabled'];
             $this->avatar = $user_query->row['image'];
 
             $user_group_query = $this->db->query("SELECT permission FROM " . DB_PREFIX . "user_group WHERE user_group_id = '" . (int) $user_query->row['user_group_id'] . "'");
@@ -85,6 +100,8 @@ class User {
                     $this->permission[$key] = $value;
                 }
             }
+
+            $this->db->query("UPDATE " . DB_PREFIX . "user SET two_factor = '' WHERE user_id = '" . (int) $this->session->data['user_id'] . "'");
 
             return true;
         } else {
@@ -98,6 +115,9 @@ class User {
         $this->user_id = '';
         $this->username = '';
         $this->avatar = '';
+        $this->twofactor = '';
+
+
 
         session_destroy();
     }
@@ -121,20 +141,36 @@ class User {
     public function getUserName() {
         return $this->username;
     }
-    
-    public function getFullName(){
+
+    public function getFullName() {
         return $this->fullname;
     }
-    
+
     public function getAvatar() {
-              
+
         if (file_exists(DIR_IMAGE . $this->avatar)) {
             $this->avatar = $this->imager->resize($this->avatar, 100, 100);
         } else {
             $this->avatar = $this->imager->resize('no_image.jpg', 100, 100);
         }
-        
+
         return $this->avatar;
+    }
+
+    public function getUserInfo($username) {
+
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "user WHERE username = '" . $this->db->escape($username) . "'");
+
+        return $query->row;
+    }
+
+    public function setPermission($permisson) {
+
+        $this->_permission = $permisson;
+    }
+
+    public function getPermission() {
+        return $this->_permission;
     }
 
 }

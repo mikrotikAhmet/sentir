@@ -29,14 +29,8 @@ class ControllerCommonLogout extends Controller {
         $this->user->logout();
 
         unset($this->session->data['token']);
-        
-        if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
-            $server = HTTPS_SERVER;
-        } else {
-            $server = HTTP_SERVER;
-        }
 
-        $this->redirect($server);
+        $this->redirect($this->url->link('common/login', '', 'SSL'));
     }
 
 }

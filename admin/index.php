@@ -165,14 +165,16 @@ $registry->set('document', new Document());
 // Currency
 $registry->set('currency', new Currency($registry));		
 
+// Encryption
+$registry->set('encryption', new Encryption($config->get('config_encryption')));
+
 // User
 $registry->set('user', new User($registry));
 
-// Credit Card
-$registry->set('creditcard', new CreditCardValidator());
+// SMS Gateway
+$registry->set('sms', new Sms($registry));
 
-// Encryption
-$registry->set('encryption', new Encryption($config->get('config_encryption')));
+
 
 // Front Controller
 $controller = new Front($registry);

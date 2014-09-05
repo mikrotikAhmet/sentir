@@ -18,7 +18,7 @@
 
 /**
  * @package     EGC Services Ltd
- * @version     $Id: home.php Aug 15, 2014 ahmet
+ * @version     $Id: home.php Sep 3, 2014 ahmet
  * @copyright   Copyright (c) 2014 EGC Services Ltd .
  * @license     http://www.semiteproject.com/license/
  */
@@ -27,4 +27,19 @@
  *
  * @author ahmet
  */
+// Heading
+$_['heading_title']                 = 'Dashboard';
 
+// Text
+
+// Column 
+
+// Entry
+
+// Error
+$_['error_install']                 = 'Warning: Install folder still exists and should be deleted for security reasons!';
+$_['error_image']                   = 'Warning: Image directory %s not writeable!';
+$_['error_image_cache']             = 'Warning: Image cache directory %s not writeable!';
+$_['error_cache']                   = 'Warning: Cache directory %s not writeable!';
+$_['error_download']                = 'Warning: Download directory %s not writeable!';
+$_['error_logs']                    = 'Warning: Log directory %s not writeable!';

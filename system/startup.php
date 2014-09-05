@@ -111,10 +111,7 @@ $auto_loader = new Autoloader();
 $classes['helper'] = array(
     'json',
     'utf8',
-    'debug',
-    'vat',
-    'creditcard',
-    'iban');
+    'debug');
 $classes['engine'] = array(
     'registry',
     'action',
@@ -142,7 +139,8 @@ $classes['library'] = array(
     'image',
     'encryption',
     'content',
-    'module');
+    'module',
+    'sms');
 
 if ((isset($classes)) && is_array($classes)) {
 

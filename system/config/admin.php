@@ -30,12 +30,12 @@
 // HTTP
 define('HTTP_SERVER', 'http://'.$_SERVER['HTTP_HOST'].'/admin/');
 define('HTTP_PUBLIC', 'http://'.$_SERVER['HTTP_HOST'].'/');
-define('HTTP_IMAGE', 'http://'.$_SERVER['HTTP_HOST'].'/image/');
+define('HTTP_IMAGE', 'http://'.$_SERVER['HTTP_HOST'].'/storage/image/');
 
 // HTTPS
 define('HTTPS_SERVER', 'https://'.$_SERVER['HTTP_HOST'].'/admin/');
 define('HTTPS_PUBLIC', 'https://'.$_SERVER['HTTP_HOST'].'/');
-define('HTTPS_IMAGE', 'https://'.$_SERVER['HTTP_HOST'].'/image/');
+define('HTTPS_IMAGE', 'https://'.$_SERVER['HTTP_HOST'].'/storage/image/');
 
 // DIR
 define('DIR_APPLICATION', APPLICATION_PATH_COR.'admin/');
@@ -45,9 +45,9 @@ define('DIR_DATABASE', APPLICATION_PATH_COR.'system/database/');
 define('DIR_TEMPLATE', APPLICATION_PATH_COR.'admin/view/template/');
 define('DIR_LANGUAGE', APPLICATION_PATH_COR.'admin/language/');
 define('DIR_CONFIG', APPLICATION_PATH_COR.'system/library/config/');
-define('DIR_IMAGE', APPLICATION_PATH_COR.'image/');
+define('DIR_IMAGE', APPLICATION_PATH_COR.'storage/image/');
 define('DIR_CACHE', APPLICATION_PATH_COR.'system/cache/');
-define('DIR_DOWNLOAD', APPLICATION_PATH_COR.'download/');
+define('DIR_DOWNLOAD', APPLICATION_PATH_COR.'storage/download/');
 define('DIR_LOGS', APPLICATION_PATH_COR.'system/logs/');
 define('DIR_PUBLIC', APPLICATION_PATH_COR.'public/');
 

@@ -31,9 +31,9 @@ class ControllerErrorPermission extends Controller {
         $this->document->setTitle($this->language->get('heading_title'));
 
         $this->data['heading_title'] = $this->language->get('heading_title');
-        $this->data['heading_sub_title'] = $this->language->get('heading_sub_title');
 
         $this->data['text_permission'] = $this->language->get('text_permission');
+        $this->data['text_back'] = $this->language->get('text_back');
 
         $this->data['breadcrumbs'] = array();
 
@@ -48,6 +48,8 @@ class ControllerErrorPermission extends Controller {
             'href' => $this->url->link('error/permission', 'token=' . $this->session->data['token'], 'SSL'),
             'separator' => ' :: '
         );
+        
+        $this->data['home'] = $this->url->link('common/home','token='.$this->session->data['token'],'SSL');
 
         $this->template = 'error/permission.tpl';
         $this->children = array(

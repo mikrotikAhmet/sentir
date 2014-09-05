@@ -190,8 +190,8 @@ $(document).ready(function(){
 	
 	
 	/** BEGIN DATATABLE EXAMPLE **/
-	if ($('#datatable-example').length > 0){
-		$('#datatable-example').dataTable();
+	if ($('#datatable').length > 0){
+		$('#datatable').dataTable();
 	}
 	
 	

@@ -18,7 +18,7 @@
 
 /**
  * @package     EGC Services Ltd
- * @version     $Id: permission.php Aug 15, 2014 ahmet
+ * @version     $Id: permission.php Sep 4, 2014 ahmet
  * @copyright   Copyright (c) 2014 EGC Services Ltd .
  * @license     http://www.semiteproject.com/license/
  */
@@ -30,9 +30,5 @@
 // Heading
 $_['heading_title'] = 'Permission Denied!'; 
 
-// Sub Heading
-$_['heading_sub_title'] = 'You have reached an error page.'; 
-
 // Text
 $_['text_permission'] = 'You do not have permission to access this page, please refer to your system administrator.';
-

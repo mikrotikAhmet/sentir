@@ -28,6 +28,7 @@ class Response {
     private $headers = array();
     private $level = 0;
     private $output;
+    private $_isPageExist = true;
 
     public function addHeader($header) {
         $this->headers[] = $header;
@@ -92,6 +93,15 @@ class Response {
 
             echo $output;
         }
+    }
+    
+       public function set_isPageExist($value){
+        
+        $this->_isPageExist = $value;
+    }
+    
+    public function isPageExist(){
+        return $this->_isPageExist;
     }
 
 }

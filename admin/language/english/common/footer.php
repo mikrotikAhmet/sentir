@@ -18,7 +18,7 @@
 
 /**
  * @package     EGC Services Ltd
- * @version     $Id: footer.php Aug 15, 2014 ahmet
+ * @version     $Id: footer.php Sep 3, 2014 ahmet
  * @copyright   Copyright (c) 2014 EGC Services Ltd .
  * @license     http://www.semiteproject.com/license/
  */
@@ -27,5 +27,6 @@
  *
  * @author ahmet
  */
-$_['text_footer'] = '&copy; 2012-' . date('Y').' <a href="http://www.semiteproject.com" target="_blank">Semite LLC</a>. Trademarks belong to their respective owners. All rights reserved. Version %s';
-
+// Text
+$_['text_confirm']			           = 'Delete/Uninstall cannot be undone! Are you sure you want to do this?';
+$_['text_footer'] = '<a href="http://www.sentir.com">EGaming Consultant</a> &copy; 2009-' . date('Y') . ' All Rights Reserved.<br />Version %s';

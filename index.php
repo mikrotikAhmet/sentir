@@ -1,5 +1,4 @@
 <?php
-
 /**
  * CodeIgniter
  *
@@ -17,17 +16,16 @@
 // ------------------------------------------------------------------------
 
 /**
- * @package     EGC Services Ltd
- * @version     $Id: index.php Aug 15, 2014 ahmet
- * @copyright   Copyright (c) 2014 EGC Services Ltd .
- * @license     http://www.semiteproject.com/license/
+ * @package     Semite LLC
+ * @version     $Id: turkiyefinans.php Aug 20, 2014 ahmet
+ * @copyright   Copyright (c) 2014 Semite LLC .
+ * @license     http://www.semitepayment.com/license/
  */
 /**
- * Description of index.php
+ * Description of turkiyefinans.php
  *
  * @author ahmet
  */
-
 // Constants
 define('_ENGINE_R_BASE', dirname($_SERVER['SCRIPT_NAME']));
 define('_ENGINE_R_FILE', $_SERVER['SCRIPT_NAME']);

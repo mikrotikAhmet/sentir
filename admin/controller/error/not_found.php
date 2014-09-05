@@ -33,6 +33,7 @@ class ControllerErrorNotFound extends Controller {
         $this->data['heading_title'] = $this->language->get('heading_title');
 
         $this->data['text_not_found'] = $this->language->get('text_not_found');
+        $this->data['text_back'] = $this->language->get('text_back');
 
         $this->data['breadcrumbs'] = array();
 
@@ -47,7 +48,11 @@ class ControllerErrorNotFound extends Controller {
             'href' => $this->url->link('error/not_found', 'token=' . $this->session->data['token'], 'SSL'),
             'separator' => ' :: '
         );
+        
+        $this->data['home'] = $this->url->link('common/home','token='.$this->session->data['token'],'SSL');
 
+        $this->response->set_isPageExist(false);
+        
         $this->template = 'error/not_found.tpl';
         $this->children = array(
             'common/header',
